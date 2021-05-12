@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>注册</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="all,follow">
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome CSS-->
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<!-- Custom icon font-->
+		<link rel="stylesheet" href="css/fontastic.css">
+		<!-- Google fonts - Open Sans-->
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"> -->
+		<!-- Fancybox-->
+		<link rel="stylesheet" href="vendor/fancyapps/fancybox/jquery.fancybox.min.css">
+		<!-- theme stylesheet-->
+		<link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+		<!-- Custom stylesheet - for your changes-->
+		<link rel="stylesheet" href="css/custom.css">
+		<!--引入网页标题图片-->
+		<link rel="shortcut icon" href="img/favicon.ico">
+		
+		<!-- font files  -->
+		<link href='http://fonts.useso.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.useso.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+		<!-- /font files  -->
+		<!-- css files -->
+		<link href="css/loginstyle.css" rel='stylesheet' type='text/css' media="all" />
+		<!-- /css files -->
+		<!-- Tweaks for older IEs-->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+			[endif]-->
+		<!-- JavaScript files-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/popper.js/umd/popper.min.js"> </script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+		<script src="vendor/fancyapps/fancybox/jquery.fancybox.min.js"></script>
+		<script src="js/front.js"></script>
+		<script src="js/include_user_header.js"></script>
+		<script>
+			function checkUsername() {
+				//1.获取用户名值
+				var username = $("#username").val();
+				//2.定义正则
+				var reg_username = /^\w{8,16}$/;
+
+				//3.判断，给出提示信息
+				var flag = reg_username.test(username);
+				if(flag){
+					//用户名合法
+					$("#username").css("border","");
+				}
+				else{
+					//用户名非法,加一个红色边框
+					$("#username").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkPassword(){
+				//1.获取用户名值
+				var password = $("#password").val();
+				//2.定义正则
+				var reg_password = /^\w{8,16}$/;
+
+				//3.判断，给出提示信息
+				var flag = reg_password.test(password);
+				if(flag){
+					//用户名合法
+					$("#password").css("border","");
+				}
+				else{
+					//用户名非法,加一个红色边框
+					$("#password").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkEmail() {
+				//1.获取邮箱
+				var email = $("#email").val();
+				//2.定义正则
+				var reg_email = /^\w+@\w+\.\w+$/;
+
+				//3.判断
+				var flag = reg_email.test(email);
+				if(flag){
+					$("#email").css("border","");
+				}
+				else{
+					$("#email").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkCheckcode(){
+				var checkcode = $("#checkcode").val();
+				var flag = false;
+
+				if (checkcode == null){
+					flag = false;
+				}
+				else{
+					flag = true;
+				}
+
+				return flag;
+			}
+
+			$(function(){
+				$("#registe").submit(function () {
+					if (checkUsername() && checkPassword() && checkEmail() && checkCheckcode()){
+
+					}
+				});
+
+				$("#username").blur(checkUsername);
+				$("#password").blur(checkPassword);
+				$("#email").blur(checkEmail);
+				$("#activecode").blur(checkCheckcode);
+			});
+
+		</script>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<header class="header" id="user_header">
+
+		</header>
+		
+		<section class="newsletter">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-12">
+						<h2 style="text-align: center;">个人博客</h2>	
+						<span></span>
+					</div>
+					<div class="col-md-5">
+						<div class="form-holder">
+							<form action="#" method="post">
+								<div class="form-group">
+									<input type="text" id="username" name="username" placeholder="账号：8-16位的数字/字母组合">
+								</div>
+								<div class="form-group">
+									<input type="password" id="password" name="password" placeholder="密码：8-16位的数字/字母组合">
+								</div>
+								<div class="form-group">
+									<input type="text" id="email" name="email"  placeholder="邮箱：">
+								</div>
+								<div class="form-group">
+									<input type="text" id="checkcode"  placeholder="邮箱验证码：" name="checkcode">
+									<img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+									<script type="text/javascript">
+										//图片点击事件
+										function changeCheckCode(img) {
+											img.src="checkCode?"+new Date().getTime();
+										}
+									</script>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="submit btn-block" id="registe">注册</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

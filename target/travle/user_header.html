@@ -1,0 +1,49 @@
+<!-- 导航栏-->
+<nav class="navbar navbar-expand-lg">
+    <!-- 查询模块 -->
+    <div class="search-area">
+        <div class="search-area-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn"><i class="icon-close"></i></div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="search" name="search" id="search" placeholder="你找啥?">
+                            <button type="submit" class="submit"><i class="icon-search-1"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- 导航菜单 -->
+        <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- 首页 -->
+            <a href="user_index.html" class="navbar-brand">首页</a>
+            <!-- 汉堡按钮-->
+            <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <!-- 分类菜单 -->
+        <div id="navbarcollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="user_blog.html" class="nav-link" id="user_blog">文章</a></li>
+            </ul>
+            <!-- 搜索按钮 -->
+            <div class="navbar-text">
+                <span></span>
+                <span></span>
+                <a href="#" class="search-btn"><i class="icon-search-1"></i></a>
+            </div>
+            <ul class="langs navbar-text">
+                <a href="user_sign_in.html" id="user_sign_in">登录</a>
+                <span> </span>
+                <a href="user_sign_up.html" id="user_sign_up">注册</a>
+            </ul>
+        </div>
+    </div>
+</nav>

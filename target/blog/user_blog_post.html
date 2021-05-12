@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+
+
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="all,follow">
+
+		<link rel="stylesheet" href="static/simplemde.min.css">
+
+		<!-- Styles -->
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="assets/plugins/icomoon/style.css" rel="stylesheet">
+		<link href="assets/plugins/uniform/css/default.css" rel="stylesheet"/>
+		<link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet"/>
+		<link href="assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet">
+
+		<!-- Theme Styles -->
+		<link href="assets/css/ecaps.min.css" rel="stylesheet">
+		<link href="assets/css/custom.css" rel="stylesheet">
+
+		<!--引入网页标题图片-->
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		<!-- Javascripts -->
+		<script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+		<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+		<script src="assets/plugins/switchery/switchery.min.js"></script>
+		<script src="assets/plugins/d3/d3.min.js"></script>
+		<script src="assets/plugins/nvd3/nv.d3.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.time.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.symbol.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.resize.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.pie.min.js"></script>
+		<script src="assets/plugins/chartjs/chart.min.js"></script>
+		<script src="assets/js/ecaps.min.js"></script>
+		<script src="assets/js/pages/dashboard.js"></script>
+		<script src="static/simplemde.min.js"></script>
+		<script src="js/include_admin_menu.js"></script>
+		<script>
+
+			//获取url中的参数
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if (r != null) {
+					return decodeURI(r[2]); //解码
+				}
+				return null; //返回参数值
+			}
+			$(function(){
+				$.get("blog/getPost",{"blogSrc":getUrlParam("blogSrc")},function (data) {
+					var simplemde = new SimpleMDE();
+					var blogHTML = simplemde.markdown(data);
+					var blogTitle = getUrlParam("blogTitle");
+					$("#blogTitle").append(blogTitle+'<a><i class="fa fa-bookmark-o"></i></a>');
+					$("#blog").append(blogHTML);
+				} );
+			});
+		</script>
+	</head>
+	<body>
+		<!-- Page Container -->
+		<div class="main">
+			<!-- 主页内容 -->
+			<div class="content">
+				<!-- 主内容 -->
+				<div class="page-inner">
+					<!-- 编辑器 -->
+					<div class="row">
+						<h1 id="blogTitle" style="text-align: center"></h1>
+						<div class="col-lg-12 col-md-12" >
+							<div class="panel panel-white stats-widget">
+								<div class="panel-body">
+									<div id="blog">
+										<div id="markdown-editor" style="display: none">
+											<textarea id="editorarea"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="skcats">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>后台管理首页</title>
+
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/plugins/icomoon/style.css" rel="stylesheet">
+        <link href="assets/plugins/uniform/css/default.css" rel="stylesheet"/>
+        <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet"/>
+        <link href="assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet">
+      
+        <!-- Theme Styles -->
+        <link href="assets/css/ecaps.min.css" rel="stylesheet">
+        <link href="assets/css/custom.css" rel="stylesheet">
+		
+		<!--引入网页标题图片-->
+		<link rel="shortcut icon" href="img/favicon.ico">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        [endif]-->
+
+    </head>
+    <body>
+        
+        <!-- Page Container -->
+        <div class="page-container" >
+            <!-- 页面侧边栏 -->
+            <div class="page-sidebar" id="page-sidebar">
+            </div>
+            
+            <!-- 主页内容 -->
+            <div class="page-content">
+                <!-- 主页的导航栏 -->
+                <div class="page-header">
+					<!-- 搜索框 -->
+                    <div class="search-form">
+                        <form action="#" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+					<!-- 导航栏信息 -->
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- 这部分用于移动端的展示 -->
+                            <div class="navbar-header">
+                                <div class="logo-sm">
+                                    <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+                                    <a class="logo-box" href="admin_index.html"><span>首页</span></a>
+                                </div>
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                            </div>
+                        
+                            <!-- 收集导航链接，表单和其他内容切换 -->
+                        
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<!-- 电脑端左上方的三个图标 -->
+                                <ul class="nav navbar-nav">
+									<!-- 收放左边菜单栏 -->
+                                    <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+									<!-- 全屏 -->
+                                    <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+									<!-- 搜索 -->
+                                    <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
+                                </ul>
+								<!-- 电脑端右上方的三个图标 -->
+                                <ul class="nav navbar-nav navbar-right">					
+                                    <li class="dropdown user-dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Profile</a></li>
+                                            <li><a href="#">Calendar</a></li>
+                                            <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">退出登录</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+				<!-- 主内容 -->
+                <div class="page-inner">
+                    <div class="page-title">
+                        <h3 class="breadcrumb-header">网站访问信息统计</h3>
+                    </div>
+					<!-- 第一栏 -->
+                    <div id="main-wrapper">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="panel panel-white stats-widget">
+                                    <div class="panel-body">
+                                        <div class="pull-left">
+                                            <span class="stats-number">+781,876</span>
+                                            <p class="stats-info">今日访问人次</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <i class="icon-arrow_upward stats-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="panel panel-white stats-widget">
+                                    <div class="panel-body">
+                                        <div class="pull-left">
+                                            <span class="stats-number">578,100</span>
+                                            <p class="stats-info">总访问人次</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <i class="icon-arrow_upward stats-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="panel panel-white stats-widget">
+                                    <div class="panel-body">
+                                        <div class="pull-left">
+                                            <span class="stats-number">+23,356</span>
+                                            <p class="stats-info">今日新增注册数</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <i class="icon-arrow_upward stats-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="panel panel-white stats-widget">
+                                    <div class="panel-body">
+                                        <div class="pull-left">
+                                            <span class="stats-number">565,625,852</span>
+                                            <p class="stats-info">总注册数</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <i class="icon-arrow_upward stats-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<!-- 第二行，柱状图，曲线图 -->
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Total Revenue</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="chart1"><svg></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Server Status</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="container-fluid">
+                                            <div class="server-load row">
+                                                <div class="server-stat col-sm-4">
+                                                    <p>167GB</p>
+                                                    <span>Usage</span>
+                                                </div>
+                                                <div class="server-stat col-sm-4">
+                                                    <p>320GB</p>
+                                                    <span>ecaps</span>
+                                                </div>
+                                                <div class="server-stat col-sm-4">
+                                                    <p>57.4%</p>
+                                                    <span>CPU</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="chart2"><svg></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 第三行 -->
+						<div class="row">
+                            <div class="col-lg-5 col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Tasks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="task-list">
+                                            <div class="task-item">
+                                                <span class="task-name">Download 'Alpha' admin template</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                                        <span class="sr-only">80% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="task-item">
+                                                <span class="task-name">Create a new landing page</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                                                        <span class="sr-only">10% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="task-item">
+                                                <span class="task-name">Delete inactive users</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                                                        <span class="sr-only">80% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="task-item">
+                                                <span class="task-name">Update NVD3 chart plugin<i class="fa fa-check"></i></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                        <span class="sr-only">100% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="task-item">
+                                                <span class="task-name">Install 4 new layouts<i class="fa fa-check"></i></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                        <span class="sr-only">100% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Invoices</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive invoice-table">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">0567</th>
+                                                        <td>Kenny Highland</td>
+                                                        <td><span class="label label-success">Finished</span></td>
+                                                        <td>$427</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">0186</th>
+                                                        <td>Darrell Price</td>
+                                                        <td>Twitter</td>
+                                                        <td><span class="label label-success">Finished</span></td>
+                                                        <td>$1714</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">0712</th>
+                                                        <td>Richard Lunsford</td>
+                                                        <td>Facebook</td>
+                                                        <td><span class="label label-danger">Denied</span></td>
+                                                        <td>$685</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">0095</th>
+                                                        <td>Amy Walker</td>
+                                                        <td>Youtube</td>
+                                                        <td><span class="label label-warning">Pending</span></td>
+                                                        <td>$9900</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">1054</th>
+                                                        <td>Kathy Olson</td>
+                                                        <td>Youtube</td>
+                                                        <td><span class="label label-default">Upcoming</span></td>
+                                                        <td>$1250</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">0043</th>
+                                                        <td>Susan Mabry</td>
+                                                        <td>Instagram</td>
+                                                        <td><span class="label label-default">Upcoming</span></td>
+                                                        <td>$399</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- Row -->
+                        <!-- 第四行 -->
+						<div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Browsers</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="browser-stats">
+                                            <ul class="list-unstyled">
+                                                <li><i class="fa fa-chrome"></i>Google Chrome<div class="text-success pull-right">32%<i class="fa fa-level-up"></i></div></li>
+                                                <li><i class="fa fa-firefox"></i>Firefox<div class="text-success pull-right">25%<i class="fa fa-level-up"></i></div></li>
+                                                <li><i class="fa fa-internet-explorer"></i>Internet Explorer<div class="text-success pull-right">16%<i class="fa fa-level-up"></i></div></li>
+                                                <li><i class="fa fa-safari"></i>Safari<div class="text-danger pull-right">13%<i class="fa fa-level-down"></i></div></li>
+                                                <li><i class="fa fa-opera"></i>Opera<div class="text-danger pull-right">7%<i class="fa fa-level-down"></i></div></li>
+                                                <li><i class="fa fa-tablet"></i>Mobile &amp; tablet<div class="text-success pull-right">4%<i class="fa fa-level-up"></i></div></li>
+                                                <li><i class="fa fa-hashtag"></i>Others<div class="text-success pull-right">3%<i class="fa fa-level-up"></i></div></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Projects</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="project-stats">
+                                            <ul class="list-unstyled">
+                                                <li>Alpha - Admin Template<span class="label label-default pull-right">85%</span></li>
+                                                <li>Meteor - Landing Page<span class="label label-success pull-right">Finished</span></li>
+                                                <li>Modern - Corporate Website<span class="label label-success pull-right">Finished</span></li>
+                                                <li>ecaps - Admin Template<span class="label label-danger pull-right">Rejected</span></li>
+                                                <li>Backend UI<span class="label label-default pull-right">27%</span></li>
+                                                <li>Personal Blog<span class="label label-default pull-right">48%</span></li>
+                                                <li>E-mail Templates<span class="label label-default pull-right">Pending</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Income</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <canvas id="chart3"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>		
+            </div>
+        </div>
+        <!-- Javascripts -->
+        <script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+        <script src="assets/plugins/switchery/switchery.min.js"></script>
+        <script src="assets/plugins/d3/d3.min.js"></script>
+        <script src="assets/plugins/nvd3/nv.d3.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.time.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.symbol.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.resize.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="assets/plugins/flot/jquery.flot.pie.min.js"></script>
+        <script src="assets/plugins/chartjs/chart.min.js"></script>
+        <script src="assets/js/ecaps.min.js"></script>
+        <script src="assets/js/pages/dashboard.js"></script>
+        <script src="js/include_admin_menu.js"></script>
+    </body>
+</html>

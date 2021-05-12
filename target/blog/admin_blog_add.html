@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>编辑器</title>
+		<link rel="stylesheet" href="static/simplemde.min.css">
+		
+		<!-- Styles -->
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="assets/plugins/icomoon/style.css" rel="stylesheet">
+		<link href="assets/plugins/uniform/css/default.css" rel="stylesheet"/>
+		<link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet"/>
+		<link href="assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet">  
+		      
+		<!-- Theme Styles -->
+		<link href="assets/css/ecaps.min.css" rel="stylesheet">
+		<link href="assets/css/custom.css" rel="stylesheet">
+		
+		<!--引入网页标题图片-->
+		<link rel="shortcut icon" href="img/favicon.ico">
+		
+		<!-- Javascripts -->
+		<script src="assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+		<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+		<script src="assets/plugins/switchery/switchery.min.js"></script>
+		<script src="assets/plugins/d3/d3.min.js"></script>
+		<script src="assets/plugins/nvd3/nv.d3.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.time.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.symbol.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.resize.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
+		<script src="assets/plugins/flot/jquery.flot.pie.min.js"></script>
+		<script src="assets/plugins/chartjs/chart.min.js"></script>
+		<script src="assets/js/ecaps.min.js"></script>
+		<script src="assets/js/pages/dashboard.js"></script>
+		<script src="static/simplemde.min.js"></script>
+		<script src="js/include_admin_menu.js"></script>
+		<script>
+			$(function(){
+				var simplemde = new SimpleMDE();				
+				var isHidePageSidebar = false;				
+				
+				$("a[class='fa fa-columns no-disable no-mobile']").click(function(){
+					if(isHidePageSidebar == false){
+						$("div[class='page-sidebar']").fadeOut(10);
+						isHidePageSidebar = true;
+					}
+				});
+				
+				$("a[class='fa fa-arrows-alt no-disable no-mobile']").click(function(){
+					if(isHidePageSidebar == true){
+						$("div[class='page-sidebar']").fadeIn(10);
+						isHidePageSidebar = false;
+					}
+					else if(isHidePageSidebar == false){
+						$("div[class='page-sidebar']").fadeOut(10);
+						isHidePageSidebar = true;
+					}
+				});
+
+			});
+
+		</script>
+		<script>
+			function save() {
+				$.ajax({
+					url: 'blog/save' ,
+					type: 'POST',
+					data: new FormData($("#uploadForm")[0]),
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (result) {
+						alert("添加成功！");
+						return true;
+					},
+					error: function () {
+						alert("添加失败！");
+						return false;
+					}
+				});
+
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Page Container -->
+		<div class="page-container">
+		    <!-- 页面侧边栏 -->
+		    <div class="page-sidebar" id="page-sidebar">
+		    </div>
+		    
+		    <!-- 主页内容 -->
+		    <div class="page-content">
+		        <!-- 主页的导航栏 -->
+		        <div class="page-header">
+					<!-- 搜索框 -->
+		            <div class="search-form">
+		                <form action="#" method="GET">
+		                    <div class="input-group">
+		                        <input type="text" name="search" class="form-control search-input" placeholder="找点啥...">
+		                        <span class="input-group-btn">
+		                            <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
+		                        </span>
+		                    </div>
+		                </form>
+		            </div>
+					<!-- 导航栏信息 -->
+		            <nav class="navbar navbar-default">
+		                <div class="container-fluid">
+		                    <!-- 这部分用于移动端的展示 -->
+		                    <div class="navbar-header">
+		                        <div class="logo-sm">
+		                            <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+		                            <a class="logo-box" href="admin_index.html"><span>首页</span></a>
+		                        </div>
+		                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		                            <i class="fa fa-angle-down"></i>
+		                        </button>
+		                    </div>
+		                
+		                    <!-- 收集导航链接，表单和其他内容切换 -->
+		                
+		                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<!-- 电脑端左上方的三个图标 -->
+		                        <ul class="nav navbar-nav">
+									<!-- 收放左边菜单栏 -->
+		                            <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+									<!-- 全屏 -->
+		                            <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+									<!-- 搜索 -->
+		                            <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
+		                        </ul>
+								<!-- 电脑端右上方的三个图标 -->
+		                        <ul class="nav navbar-nav navbar-right">					
+		                            <li class="dropdown user-dropdown">
+		                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+		                                <ul class="dropdown-menu">
+		                                    <li><a href="#">Profile</a></li>
+		                                    <li><a href="#">Calendar</a></li>
+		                                    <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a></li>
+		                                    <li role="separator" class="divider"></li>
+		                                    <li><a href="#">退出登录</a></li>
+		                                </ul>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </nav>
+		        </div>
+				<!-- 主内容 -->
+		        <div class="page-inner">
+		            <div class="page-title">
+		                <h3 class="breadcrumb-header">添加文章</h3>
+		            </div>
+						<form action="admin_blog_manage.html" method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="return save()">
+							<div class="row">
+								<div class="col-lg-12 col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+									<div>
+										<div class="input-group">
+											<span class="input-group-addon">首图</span>
+											<input type="text" class="form-control" placeholder="首图引用地址http://..." aria-describedby="basic-addon1" name="imgSrc"  id="imgSrc">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+									<div>
+										<div class="input-group">
+											<input type="file"  placeholder="选择文件" name="file" id="file">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12 col-md-12" style="margin-top: 20px;">
+									<div>
+										<a><button type="submit" class="btn btn-facebook btn-block">发布文章</button></a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+		        </div>		
+		    </div>
+		</div>
+		
+		
+	</body>
+</html>

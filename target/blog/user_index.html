@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>首页</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="all,follow">
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome CSS 图片，字体-->
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<!-- Custom icon font-->
+		<link rel="stylesheet" href="css/fontastic.css">
+		<!-- Google fonts - Open Sans-->
+		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"> -->
+		<!-- Fancybox-->
+		<link rel="stylesheet" href="vendor/fancyapps/fancybox/jquery.fancybox.min.css">
+		<!-- theme stylesheet-->
+		<link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+		<!-- Custom stylesheet - for your changes-->
+		<link rel="stylesheet" href="css/custom.css">
+		<!--引入网页标题图片-->
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		<style>
+			/* 让图片自适应父级大小 */
+			img {
+				width: 100%;
+				height: 100%;
+				max-width: 100%;
+				max-height: 100%;
+			}
+		</style>
+
+		<!-- JavaScript文件-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/popper.js/umd/popper.min.js"> </script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+		<script src="vendor/fancyapps/fancybox/jquery.fancybox.min.js"></script>
+		<script src="js/front.js"></script>
+		<script src="js/include_user_header.js"></script>
+		<script src="js/include_user_footer.js"></script>
+		<script>
+			//获取url中的参数
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg);    //匹配目标参数
+				if (r != null) {
+					return decodeURI(r[2]); //解码
+				}
+				return null; //返回参数值
+			}
+
+			$(function () {
+				var currentPage=getUrlParam("currentPage");
+				var pageSize=5;
+				changePage(currentPage,pageSize );
+			})
+
+
+			function changePage(currentPage, pageSize) {
+
+				$.get("blog/pageQuery", {currentPage: currentPage, pageSize: pageSize}, function (pageBean) {
+					var blogList = pageBean.list;
+					for (var i=0; i < blogList.length; i++) {
+						d = blogList[i];
+						var htm="" +
+								'<div class="row d-flex align-items-stretch" id="post_' + i + '">' +
+									'<div class="text col-lg-7">' +
+										'<div class="text-inner d-flex align-items-center">' +
+											'<div class="content">' +
+												'<header class="post-header">' +
+													'<a href="user_blog_post.html?blogSrc=' + d["blogSrc"] + '&blogTitle=' + d["blogTitle"] + '">' +
+														'<h2 class="h4">' + d["blogTitle"] + '</h2>' +
+													'</a>' +
+												'</header>' +
+											'</div>' +
+										'</div>' +
+									'</div>' +
+									'<div class="image col-lg-5">' +
+										'<img src="' + d["imgSrc"] + '" alt="...">' +
+									'</div>'+
+								'</div><br><hr>';
+
+						$("#post").append(htm);
+					}
+
+					var lis = "";
+					var beforePage;
+					//计算上一页的页码
+					var beforeNum =  pageBean.currentPage - 1;
+					if(beforeNum <= 0){
+						beforeNum = 1;
+						beforePage = '<li class="page-item" ><a href="javascript:void(0);" class="page-link"> <i class="fa fa-angle-left"></i></a></li>';
+					}
+					else {
+						beforePage = '<li class="page-item" ><a href="user_index.html?currentPage='+beforeNum+'" class="page-link"> <i class="fa fa-angle-left"></i></a></li>';
+					}
+
+
+					lis += beforePage;
+
+					//展示分页页码
+					/*
+                        1.一共展示5个页码，能够达到前2后2的效果
+                        2.如果前边不够2个，后边补齐5个
+                        3.如果后边不足2个，前边补齐5个
+                    */
+
+					// 定义开始位置begin,结束位置 end
+					var begin; // 开始位置
+					var end;   //  结束位置
+
+					//要显示个5页码
+					if(pageBean.totalPage < 5){
+						//总页码不够5页
+						begin = 1;
+						end = pageBean.totalPage;
+					}
+					else{
+						//总页码超过5页
+
+						begin = pageBean.currentPage - 2 ;
+						end = pageBean.currentPage + 2 ;
+
+						//2.如果前边不够2个，后边补齐5个
+						if(begin < 1){
+							begin = 1;
+							end = begin + 9;
+						}
+
+						//3.如果后边不足4个，前边补齐10个
+						if(end > pageBean.totalPage){
+							end = pageBean.totalPage;
+							begin = end - 4 ;
+						}
+					}
+					for (var i = begin; i <= end ; i++) {
+						var li;
+						//判断当前页码是否等于i
+						if(pageBean.currentPage == i){
+							li = '<li class="page-item"><a href="javascript:void(0);" class="page-link active">'+i+'</a></li>';
+						}
+						else{
+							//创建页码的li
+							li = '<li class="page-item"><a href="user_index.html?currentPage='+i+'" class="page-link">'+i+'</a></li>';
+						}
+						//拼接字符串
+						lis += li;
+					}
+
+					//计算下一页的页码
+					var afterNum = pageBean.currentPage + 1;
+					if(afterNum >= pageBean.totalPage){
+						afterNum = pageBean.totalPage;
+						lis += '<li class="page-item"><a href="javascript:void(0);" class="page-link"> <i class="fa fa-angle-right"></i></a></li>';
+
+					}
+					else {
+						lis += '<li class="page-item"><a href="user_index.html?currentPage='+afterNum+'" class="page-link"> <i class="fa fa-angle-right"></i></a></li>';
+					}
+
+
+					$("#pageNumber").append(lis);
+
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<header class="header" id="user_header">
+
+		</header>
+
+		<!-- 巨幕 -->
+		<section style="background: url(img/hero.jpg); background-size: cover; background-position: center center" class="hero">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7">
+						<h1>欢迎来到李立羽的博客</h1>
+						<a href="#" class="hero-link">发现更多</a>
+					</div>
+				</div>
+				<a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> 点击可向下滑动</a>
+			</div>
+		</section>
+
+		<!-- 博客介绍部分 -->
+		<section class="intro">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<h2 class="h3">最新博客</h2>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 精选文章展示区 -->
+		<section class="featured-posts no-padding-top">
+			<div class="container" id="post">
+
+			</div>
+			<br><br>
+			<div class="container">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination pagination-template d-flex justify-content-center" id="pageNumber">
+					</ul>
+				</nav>
+			</div>
+		</section>
+
+		<!-- 最后板块，可以用于放联系方式 -->
+		<footer class="main-footer" id="user_footer">
+
+		</footer>
+
+	</body>
+</html>
